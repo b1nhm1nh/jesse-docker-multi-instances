@@ -1,0 +1,7 @@
+  ### Redis {{ id }} ################################################
+  redis-{{ id }}:
+    image: redis:7-alpine
+    ports:
+      - "{{ export_port }}:6379"
+    container_name: redis-{{ id }}
+

@@ -1,0 +1,18 @@
+  ### Jesse's Workspace {{ id }} ################################################
+  jesse-{{ id }}:
+    image: salehmir/jesse:latest
+    depends_on:
+      - postgres
+      - redis-{{ id }}
+    tty: true
+    env_file:
+      - ../instance-{{ id }}/.env
+    ports:
+      - "{{ listen_port }}:9000"
+      # Jupyter Port
+      - "{{ jupyter_port }}:8888"
+    volumes:
+      - ../instance-{{ id }}:/home
+    container_name: jesse-{{ id }}
+    command: bash -c "python checkdb.py && jesse install-live --no-strict && jesse run"
+
